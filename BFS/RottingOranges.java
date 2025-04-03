@@ -1,8 +1,13 @@
 import java.util.*;
 
 public class RottingOranges {
-    public static int orangesRotting(int[][] grid) {
-        if (grid == null || grid.length == 0) return 0;
+      
+      // Problem: Minimum time to rot all oranges
+      // Explanation: This problem uses BFS to calculate the minimum time required for all oranges to rot in a grid. By processing rotten oranges level by level, we can track the time taken for each fresh orange to rot.
+      // Time Complexity: O(m * n), where m is the number of rows and n is the number of columns in the grid.
+      // Space Complexity: O(m * n), due to the space required for the queue.
+      public static int orangesRotting(int[][] grid) {
+          if (grid == null || grid.length == 0) return 0;
         
         int rows = grid.length;
         int cols = grid[0].length;

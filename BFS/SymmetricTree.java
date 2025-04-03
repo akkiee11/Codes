@@ -12,6 +12,10 @@ public class SymmetricTree {
         }
     }
     
+    // Problem: Check if binary tree is symmetric around center
+    // Explanation: This problem uses BFS to compare nodes at each level to determine if the tree is symmetric. By comparing nodes in pairs, we can efficiently check for symmetry.
+    // Time Complexity: O(n), where n is the number of nodes in the tree.
+    // Space Complexity: O(n), due to the space required for the queue.
     public static boolean isSymmetric(TreeNode root) {
         if (root == null) return true;
         

@@ -12,6 +12,10 @@ public class LevelOrderTraversal {
         }
     }
     
+    // Problem: Print level-wise nodes of a binary tree
+    // Explanation: This problem involves traversing a binary tree level by level, which is a classic application of BFS. By using a queue, we can efficiently process each level of the tree, ensuring that nodes are visited in the correct order.
+    // Time Complexity: O(n), where n is the number of nodes in the tree.
+    // Space Complexity: O(n), due to the space required for the queue.
     public static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;

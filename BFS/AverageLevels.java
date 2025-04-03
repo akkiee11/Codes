@@ -12,6 +12,10 @@ public class AverageLevels {
         }
     }
     
+    // Problem: Find average of all values at each tree level
+    // Explanation: This problem extends the basic BFS traversal by calculating the average value of nodes at each level. By maintaining a running sum and count of nodes at each level, we can compute the average efficiently.
+    // Time Complexity: O(n), where n is the number of nodes in the tree.
+    // Space Complexity: O(n), due to the space required for the queue.
     public static List<Double> averageOfLevels(TreeNode root) {
         List<Double> result = new ArrayList<>();
         if (root == null) return result;
