@@ -2,6 +2,54 @@ import java.util.*;
 
 public class MinimumGeneticMutation {
     
+    /*
+     * Problem Statement:
+     * A gene string can be represented by an 8-character long string, with choices from 'A', 'C', 'G', and 'T'.
+     * Given a start gene string, an end gene string, and a bank of valid gene mutations, return the minimum number
+     * of mutations needed to mutate from start to end. If there is no such a mutation, return -1.
+     * Note that the starting point is assumed to be valid, but the end point must exist in the bank.
+     * 
+     * Example 1:
+     * Input: start = "AACCGGTT", end = "AACCGGTA", bank = ["AACCGGTA"]
+     * Output: 1
+     * Explanation: The only mutation needed is to change the last character 'T' to 'A'.
+     * 
+     * Example 2:
+     * Input: start = "AACCGGTT", end = "AAACGGTA", bank = ["AACCGGTA","AACCGCTA","AAACGGTA"]
+     * Output: 2
+     * Explanation: One optimal path is "AACCGGTT" -> "AACCGGTA" -> "AAACGGTA".
+     * 
+     * Example 3:
+     * Input: start = "AAAAACCC", end = "AACCCCCC", bank = ["AAAACCCC","AAACCCCC","AACCCCCC"]
+     * Output: 3
+     * 
+     * Constraints:
+     * - start.length == 8
+     * - end.length == 8
+     * - 0 <= bank.length <= 10
+     * - bank[i].length == 8
+     * - start, end, and bank[i] consist of only the characters ['A', 'C', 'G', 'T']
+     * 
+     * Intuition:
+     * - Use BFS to find the shortest path from start to end gene
+     * - Each mutation represents an edge in the graph
+     * - Valid mutations must exist in the bank
+     * - BFS ensures we find the minimum number of mutations
+     * 
+     * Approach:
+     * 1. Convert bank to HashSet for O(1) lookup
+     * 2. Use BFS with a queue to try all possible mutations:
+     *    - For each position in the gene string
+     *    - Try replacing with each valid character (A, C, G, T)
+     *    - If new mutation is valid and not visited:
+     *      a. Add to queue for further exploration
+     *      b. Mark as visited to avoid cycles
+     * 3. Track mutation count at each level
+     * 4. Return -1 if end gene cannot be reached
+     * 
+     * Time Complexity: O(N * 4^8), where N is the length of bank
+     * Space Complexity: O(N), for the queue and visited set
+     */
     public static int minMutation(String start, String end, String[] bank) {
         // If end string is not in the bank, mutation is impossible
         Set<String> bankSet = new HashSet<>(Arrays.asList(bank));

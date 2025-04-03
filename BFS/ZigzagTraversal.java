@@ -12,6 +12,45 @@ public class ZigzagTraversal {
         }
     }
     
+    /*
+     * Problem Statement:
+     * Given the root of a binary tree, return the zigzag level order traversal of its nodes' values.
+     * (i.e., from left to right, then right to left for the next level and alternate between).
+     * 
+     * Example 1:
+     * Input: root = [3,9,20,null,null,15,7]
+     * Output: [[3],[20,9],[15,7]]
+     * 
+     * Example 2:
+     * Input: root = [1]
+     * Output: [[1]]
+     * 
+     * Example 3:
+     * Input: root = []
+     * Output: []
+     * 
+     * Constraints:
+     * - The number of nodes in the tree is in the range [0, 2000]
+     * - -100 <= Node.val <= 100
+     * 
+     * Intuition:
+     * - Use BFS with a queue for level-by-level traversal
+     * - Use a boolean flag to track direction (left-to-right or right-to-left)
+     * - Use LinkedList for easy insertion at both ends
+     * 
+     * Approach:
+     * 1. Initialize queue with root and direction flag
+     * 2. For each level:
+     *    - Create a LinkedList for current level
+     *    - Process nodes based on direction flag
+     *    - Add nodes to start/end of list based on direction
+     *    - Add children to queue for next level
+     *    - Toggle direction flag
+     * 3. Return result list containing all levels
+     * 
+     * Time Complexity: O(n), where n is the number of nodes
+     * Space Complexity: O(w), where w is the maximum width of the tree
+     */
     public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;

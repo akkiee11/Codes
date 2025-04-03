@@ -2,10 +2,49 @@ import java.util.*;
 
 public class CourseSchedule {
     
-    // Problem: Determine if you can finish all courses
-     // Explanation: This problem uses BFS to detect cycles in a directed graph representing course prerequisites. By processing nodes with zero in-degree, we can determine if all courses can be completed.
-     // Time Complexity: O(V + E), where V is the number of courses and E is the number of prerequisites.
-    // Space Complexity: O(V), due to the space required for the queue and in-degree array.
+    /*
+     * Problem Statement:
+     * There are a total of numCourses courses you have to take, labeled from 0 to numCourses - 1.
+     * Some courses have prerequisites, for example, to take course 1 you have to first take course 0,
+     * which is expressed as a pair: [1,0]. Given the total number of courses and a list of prerequisite
+     * pairs, determine if it is possible to finish all courses.
+     * 
+     * Example 1:
+     * Input: numCourses = 2, prerequisites = [[1,0]]
+     * Output: true
+     * Explanation: There are 2 courses to take. To take course 1 you should have finished course 0.
+     * So it is possible.
+     * 
+     * Example 2:
+     * Input: numCourses = 2, prerequisites = [[1,0],[0,1]]
+     * Output: false
+     * Explanation: There are 2 courses to take. To take course 1 you should have finished course 0,
+     * and to take course 0 you should have finished course 1. So it is impossible.
+     * 
+     * Constraints:
+     * - 1 <= numCourses <= 2000
+     * - 0 <= prerequisites.length <= 5000
+     * - prerequisites[i].length == 2
+     * - 0 <= ai, bi < numCourses
+     * - All the pairs prerequisites[i] are unique
+     * 
+     * Intuition:
+     * - The problem can be modeled as a directed graph where courses are vertices and prerequisites are edges
+     * - A cycle in this graph means some courses cannot be completed (they depend on each other)
+     * - BFS with in-degree tracking can detect if such cycles exist
+     * - Courses with no prerequisites (in-degree = 0) can be taken first
+     * 
+     * Approach:
+     * 1. Build adjacency list and calculate in-degree for each course
+     * 2. Start BFS with courses having no prerequisites (in-degree = 0)
+     * 3. For each course taken:
+     *    - Reduce in-degree of dependent courses
+     *    - Add courses with new in-degree of 0 to queue
+     * 4. If all courses can be taken (count equals numCourses), return true
+     * 
+     * Time Complexity: O(V + E), where V is the number of courses and E is the number of prerequisites
+     * Space Complexity: O(V), for the queue and in-degree array
+     */
       public static boolean canFinish(int numCourses, int[][] prerequisites) {
           // Create adjacency list representation of the graph
         List<List<Integer>> graph = new ArrayList<>();

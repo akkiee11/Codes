@@ -1,6 +1,53 @@
 import java.util.*;
 
 public class ShortestPathMatrix {
+    /*
+     * Problem Statement:
+     * Given an n x n binary matrix grid, return the length of the shortest clear path in the matrix.
+     * A clear path in a binary matrix is a path from the top-left cell (0, 0) to the bottom-right cell (n-1, n-1) such that:
+     * - All the visited cells of the path are 0
+     * - All the adjacent cells of the path are 8-directionally connected
+     * The length of a clear path is the number of visited cells of this path.
+     * Return -1 if there is no clear path.
+     * 
+     * Example 1:
+     * Input: grid = [[0,1],[1,0]]
+     * Output: 2
+     * Explanation: The shortest clear path is (0,0) -> (1,1)
+     * 
+     * Example 2:
+     * Input: grid = [[0,0,0],[1,1,0],[1,1,0]]
+     * Output: 4
+     * Explanation: The shortest clear path is (0,0) -> (0,1) -> (0,2) -> (1,2) -> (2,2)
+     * 
+     * Example 3:
+     * Input: grid = [[1,0,0],[1,1,0],[1,1,0]]
+     * Output: -1
+     * Explanation: No clear path exists as starting cell is blocked.
+     * 
+     * Constraints:
+     * - n == grid.length == grid[i].length
+     * - 1 <= n <= 100
+     * - grid[i][j] is 0 or 1
+     * 
+     * Intuition:
+     * - Use BFS to find shortest path as it explores all possible paths level by level
+     * - Track visited cells to avoid cycles
+     * - Consider all 8 directions for each move
+     * - Distance increases by 1 for each step
+     * 
+     * Approach:
+     * 1. Check if start and end cells are valid (0)
+     * 2. Use BFS with queue storing [row, col, distance]
+     * 3. For each cell:
+     *    - Try all 8 directions
+     *    - Add valid unvisited cells to queue
+     *    - Mark visited cells to avoid revisiting
+     * 4. Return distance when reaching end cell
+     * 
+     * Time Complexity: O(n²), where n is the side length of the grid
+     * Space Complexity: O(n²) for the queue in worst case
+     */
     // Possible directions: right, right-down, down, left-down, left, left-up, up, right-up
     private static final int[][] DIRECTIONS = {
         {0, 1}, {1, 1}, {1, 0}, {1, -1},

@@ -12,6 +12,45 @@ public class MaximumWidth {
         }
     }
     
+    /*
+     * Problem Statement:
+     * Given the root of a binary tree, return the maximum width of the given tree.
+     * The maximum width of a tree is the maximum width among all levels.
+     * The width of one level is defined as the length between the end-nodes (the leftmost and rightmost non-null nodes),
+     * where the null nodes between the end-nodes that would be present in a complete binary tree extending down to that level are also counted into the length calculation.
+     * 
+     * Example 1:
+     * Input: root = [1,3,2,5,null,null,9,6,null,7]
+     * Output: 8
+     * Explanation: The maximum width exists in the fourth level with length 8 (6,null,null,null,null,null,null,7)
+     * 
+     * Example 2:
+     * Input: root = [1,3,2,5]
+     * Output: 4
+     * Explanation: The maximum width exists in the second level with length 4 (3,null,null,2)
+     * 
+     * Constraints:
+     * - The number of nodes in the tree is in the range [1, 3000]
+     * - -100 <= Node.val <= 100
+     * 
+     * Intuition:
+     * - Use BFS to traverse the tree level by level
+     * - Assign position numbers to nodes: left child = 2*pos, right child = 2*pos + 1
+     * - Track the leftmost and rightmost nodes at each level
+     * - Width = rightmost position - leftmost position + 1
+     * 
+     * Approach:
+     * 1. Use a queue to perform level-order traversal
+     * 2. For each node, store its position value along with the node
+     * 3. At each level:
+     *    - Track the position of first and last nodes
+     *    - Calculate width as (last position - first position + 1)
+     *    - Update maximum width if current width is larger
+     * 4. Return the maximum width found
+     * 
+     * Time Complexity: O(n), where n is the number of nodes in the tree
+     * Space Complexity: O(w), where w is the maximum width of the tree
+     */
     public static int widthOfBinaryTree(TreeNode root) {
         if (root == null) return 0;
         

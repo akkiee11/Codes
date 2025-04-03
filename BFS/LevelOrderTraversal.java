@@ -12,10 +12,43 @@ public class LevelOrderTraversal {
         }
     }
     
-    // Problem: Print level-wise nodes of a binary tree
-    // Explanation: This problem involves traversing a binary tree level by level, which is a classic application of BFS. By using a queue, we can efficiently process each level of the tree, ensuring that nodes are visited in the correct order.
-    // Time Complexity: O(n), where n is the number of nodes in the tree.
-    // Space Complexity: O(n), due to the space required for the queue.
+    /*
+     * Problem Statement:
+     * Given the root of a binary tree, return the level order traversal of its nodes' values
+     * (i.e., from left to right, level by level).
+     * 
+     * Example 1:
+     * Input: root = [3,9,20,null,null,15,7]
+     * Output: [[3],[9,20],[15,7]]
+     * 
+     * Example 2:
+     * Input: root = [1]
+     * Output: [[1]]
+     * 
+     * Example 3:
+     * Input: root = []
+     * Output: []
+     * 
+     * Constraints:
+     * - The number of nodes in the tree is in the range [0, 2000]
+     * - -1000 <= Node.val <= 1000
+     * 
+     * Intuition:
+     * - Use BFS with a queue to process nodes level by level
+     * - Queue size at each iteration represents number of nodes at current level
+     * - Process all nodes at current level before moving to next level
+     * 
+     * Approach:
+     * 1. Initialize a queue with root node and result list
+     * 2. While queue is not empty:
+     *    - Get current level size
+     *    - Process all nodes at current level
+     *    - Add their children to queue for next level
+     * 3. Return the result list containing all levels
+     * 
+     * Time Complexity: O(n), where n is the number of nodes in the tree
+     * Space Complexity: O(w), where w is the maximum width of the tree
+     */
     public static List<List<Integer>> levelOrder(TreeNode root) {
         List<List<Integer>> result = new ArrayList<>();
         if (root == null) return result;

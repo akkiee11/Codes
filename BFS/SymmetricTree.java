@@ -12,10 +12,55 @@ public class SymmetricTree {
         }
     }
     
-    // Problem: Check if binary tree is symmetric around center
-    // Explanation: This problem uses BFS to compare nodes at each level to determine if the tree is symmetric. By comparing nodes in pairs, we can efficiently check for symmetry.
-    // Time Complexity: O(n), where n is the number of nodes in the tree.
-    // Space Complexity: O(n), due to the space required for the queue.
+    /*
+     * Problem Statement:
+     * Given the root of a binary tree, check whether it is a mirror of itself
+     * (i.e., symmetric around its center). A binary tree is symmetric if the left
+     * and right subtrees are mirror images of each other.
+     * 
+     * Example 1:
+     * Input: root = [1,2,2,3,4,4,3]
+     * Output: true
+     * Explanation: The binary tree is symmetric
+     *      1
+     *     / \
+     *    2   2
+     *   / \ / \
+     *  3  4 4  3
+     * 
+     * Example 2:
+     * Input: root = [1,2,2,null,3,null,3]
+     * Output: false
+     * Explanation: The binary tree is not symmetric
+     *      1
+     *     / \
+     *    2   2
+     *     \   \
+     *      3    3
+     * 
+     * Constraints:
+     * - The number of nodes in the tree is in the range [0, 1000]
+     * - -100 <= Node.val <= 100
+     * 
+     * Intuition:
+     * - Use BFS to process nodes level by level
+     * - Compare pairs of nodes from opposite sides
+     * - For symmetry, values should match and structure should mirror
+     * - Queue helps process nodes in correct order
+     * 
+     * Approach:
+     * 1. Start with root's left and right children in queue
+     * 2. Process nodes in pairs:
+     *    - Both null: continue (symmetric)
+     *    - One null or values different: return false
+     *    - Add children in mirrored order:
+     *      a. Outer pair: left.left and right.right
+     *      b. Inner pair: left.right and right.left
+     * 3. If all pairs match, return true
+     * 
+     * Time Complexity: O(n), where n is the number of nodes in the tree
+     * Space Complexity: O(w), where w is the maximum width of the tree
+     */
     public static boolean isSymmetric(TreeNode root) {
         if (root == null) return true;
         

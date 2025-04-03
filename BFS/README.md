@@ -1,89 +1,90 @@
 # Breadth-First Search (BFS) Pattern
 
 ## Introduction
-Breadth-First Search is a fundamental graph traversal algorithm that explores all vertices at the present depth before moving to vertices at the next depth level. It's particularly useful for finding shortest paths, level-wise traversal, and solving problems that require exploring nodes in layers.
+Breadth-First Search is a fundamental graph traversal algorithm that explores all vertices at the present depth before moving to vertices at the next depth level. It's particularly useful for finding shortest paths, level-wise traversal, and solving problems that require exploring neighbors first.
 
-The key intuition behind BFS is that it guarantees the shortest path in unweighted graphs by exploring nodes in order of their distance from the source. This makes it ideal for problems involving shortest paths, level-wise processing, or finding the minimum number of steps to reach a target.
+## Core Concepts
+1. Uses a queue data structure for processing
+2. Visits all nodes at current depth before moving deeper
+3. Maintains a visited set to avoid cycles
+4. Processes nodes level by level
 
 ## Problems by Difficulty
+
 ### Easy
 
 1. [**Binary Tree Level Order Traversal**](LevelOrderTraversal.java)
-   - Problem: Print level-wise nodes of a binary tree
-   - Learning: Basic BFS implementation with queue
-   - Explanation: This problem involves traversing a binary tree level by level, which is a classic application of BFS. By using a queue, we can efficiently process each level of the tree, ensuring that nodes are visited in the correct order.
-   - Time Complexity: O(n), where n is the number of nodes in the tree.
-   - Space Complexity: O(n), due to the space required for the queue.
+   - Problem Statement: Given a binary tree, return its level order traversal (i.e., from left to right, level by level).
+   - Test Cases:
+     ```
+     Input: [3,9,20,null,null,15,7]
+     Output: [[3],[9,20],[15,7]]
+
+     Input: [1]
+     Output: [[1]]
+
+     Input: []
+     Output: []
+     ```
+   - Intuition: Use a queue to process nodes level by level. The queue size at each iteration represents the number of nodes at that level.
+   - Approach:
+     1. Initialize a queue with root node
+     2. For each level:
+        - Get current level size
+        - Process all nodes at current level
+        - Add their children to queue
+   - Time Complexity: O(n)
+   - Space Complexity: O(n)
 
 2. [**Average of Levels**](AverageLevels.java)
-   - Problem: Find average of all values at each tree level
-   - Learning: Level-wise traversal with value calculation
-   - Explanation: This problem extends the basic BFS traversal by calculating the average value of nodes at each level. By maintaining a running sum and count of nodes at each level, we can compute the average efficiently.
-   - Time Complexity: O(n), where n is the number of nodes in the tree.
-   - Space Complexity: O(n), due to the space required for the queue.
+   - Problem Statement: Calculate the average value of nodes at each level in a binary tree.
+   - Test Cases:
+     ```
+     Input: [3,9,20,15,7]
+     Output: [3.0, 14.5, 11.0]
 
-3. [**Symmetric Tree**](SymmetricTree.java)
-   - Problem: Check if binary tree is symmetric around center
-   - Learning: Level-wise comparison of nodes
-   - Explanation: This problem uses BFS to compare nodes at each level to determine if the tree is symmetric. By comparing nodes in pairs, we can efficiently check for symmetry.
-   - Time Complexity: O(n), where n is the number of nodes in the tree.
-   - Space Complexity: O(n), due to the space required for the queue.
-
-### Hard
-
-1. [**Word Ladder**](WordLadder.java)
-   - Problem: Find shortest transformation sequence
-   - Learning: BFS with string manipulation
-   - Explanation: This problem involves finding the shortest transformation sequence from a start word to an end word, using a dictionary of valid words. BFS is used to explore all possible transformations level by level, ensuring the shortest path is found.
-   - Time Complexity: O(n * m^2), where n is the number of words in the dictionary and m is the length of each word.
-   - Space Complexity: O(n * m), due to the space required for the queue and visited set.
-
-2. [**Bus Routes**](BusRoutes.java)
-   - Problem: Least number of buses to reach destination
-   - Learning: BFS with multiple graphs
-   - Explanation: This problem models bus routes as a graph, where each bus stop is a node and each bus route is an edge. BFS is used to find the shortest path from the start stop to the destination stop, minimizing the number of buses taken.
-   - Time Complexity: O(n^2), where n is the number of bus stops.
-   - Space Complexity: O(n), due to the space required for the queue and visited set.
-
-3. [**Sliding Puzzle**](SlidingPuzzle.java)
-   - Problem: Minimum moves to solve sliding puzzle
-   - Learning: BFS with state tracking
-   - Explanation: This problem involves solving a sliding puzzle by finding the minimum number of moves required to reach the goal state. BFS is used to explore all possible moves from the current state, ensuring the shortest path to the goal is found.
-   - Time Complexity: O(n!), where n is the number of tiles in the puzzle.
-   - Space Complexity: O(n!), due to the space required for the queue and visited set.
+     Input: [1]
+     Output: [1.0]
+     ```
+   - Intuition: Similar to level order traversal, but maintain sum and count for each level.
+   - Approach:
+     1. Use BFS with queue
+     2. Track sum and count at each level
+     3. Calculate average after processing each level
 
 ### Medium
-1. [**Clone Graph**](CloneGraph.java)
-   - Problem: Clone a graph
-   - Learning: BFS traversal for graph cloning
 
-2. [**Course Schedule**](CourseSchedule.java)
-   - Problem: Determine if you can finish all courses
-   - Learning: BFS for cycle detection in directed graph
+1. [**Binary Tree Zigzag Level Order**](ZigzagTraversal.java)
+   - Problem Statement: Return the zigzag level order traversal of binary tree nodes (i.e., from left to right, then right to left for the next level).
+   - Test Cases:
+     ```
+     Input: [3,9,20,null,null,15,7]
+     Output: [[3],[20,9],[15,7]]
 
-3. [**Number of Islands**](NumberOfIslands.java)
-   - Problem: Count number of islands in a grid
-   - Learning: BFS for connected component counting
+     Input: [1]
+     Output: [[1]]
+     ```
+   - Intuition: Use a flag to track direction and LinkedList for easy insertion at both ends.
+   - Approach:
+     1. Use standard BFS with queue
+     2. Toggle direction flag for each level
+     3. Insert nodes at beginning/end based on direction
 
-4. [**Rotting Oranges**](RottingOranges.java)
-   - Problem: Minimum time to rot all oranges
-   - Learning: BFS for multi-source shortest path
+2. [**Rotting Oranges**](RottingOranges.java)
+   - Problem Statement: Find minimum time for all fresh oranges to become rotten in a grid. Each cell contains: 0 (empty), 1 (fresh), or 2 (rotten).
+   - Test Cases:
+     ```
+     Input: [[2,1,1],[1,1,0],[0,1,1]]
+     Output: 4
 
-5. [**Walls and Gates**](WallsAndGates.java)
-   - Problem: Fill each empty room with distance to nearest gate
-   - Learning: BFS for distance calculation in grid
-
-6. [**Zigzag Traversal**](ZigzagTraversal.java)
-   - Problem: Zigzag level order traversal of binary tree
-   - Learning: BFS with alternating level processing
-
-2. [**Binary Tree Zigzag Level Order**](ZigzagTraversal.java)
-   - Problem: Print tree levels in alternating order
-   - Learning: BFS with direction tracking
-
-3. [**Rotting Oranges**](RottingOranges.java)
-   - Problem: Time for all oranges to rot in grid
-   - Learning: Multi-source BFS with time tracking
+     Input: [[2,1,1],[0,1,1],[1,0,1]]
+     Output: -1
+     ```
+   - Intuition: Multi-source BFS starting from all rotten oranges simultaneously.
+   - Approach:
+     1. Add all rotten oranges to queue initially
+     2. Process level by level, marking fresh oranges as rotten
+     3. Track minutes passed and remaining fresh oranges
 
 ## Common BFS Patterns
 1. Queue-based Implementation
@@ -98,3 +99,8 @@ The key intuition behind BFS is that it guarantees the shortest path in unweight
 - Use level size for level-wise processing
 - Consider using multiple queues or markers for complex problems
 - Remember to handle edge cases (empty graph, single node, etc.)
+
+## Time/Space Complexity
+- Time: O(V + E) for graphs, O(n) for trees
+- Space: O(V) for queue and visited set
+- Additional space may be needed based on problem requirements

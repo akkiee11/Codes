@@ -2,10 +2,52 @@ import java.util.*;
 
 public class RottingOranges {
       
-      // Problem: Minimum time to rot all oranges
-      // Explanation: This problem uses BFS to calculate the minimum time required for all oranges to rot in a grid. By processing rotten oranges level by level, we can track the time taken for each fresh orange to rot.
-      // Time Complexity: O(m * n), where m is the number of rows and n is the number of columns in the grid.
-      // Space Complexity: O(m * n), due to the space required for the queue.
+      /*
+       * Problem Statement:
+       * You are given an m x n grid where each cell can have one of three values:
+       * - 0: representing an empty cell
+       * - 1: representing a fresh orange
+       * - 2: representing a rotten orange
+       * Every minute, any fresh orange that is 4-directionally adjacent to a rotten orange becomes rotten.
+       * Return the minimum number of minutes that must elapse until no cell has a fresh orange.
+       * Return -1 if this is impossible.
+       * 
+       * Example 1:
+       * Input: grid = [[2,1,1],[1,1,0],[0,1,1]]
+       * Output: 4
+       * 
+       * Example 2:
+       * Input: grid = [[2,1,1],[0,1,1],[1,0,1]]
+       * Output: -1
+       * Explanation: The orange in the bottom left corner (row 2, column 0) is never rotten.
+       * 
+       * Example 3:
+       * Input: grid = [[0,2]]
+       * Output: 0
+       * 
+       * Constraints:
+       * - m == grid.length
+       * - n == grid[i].length
+       * - 1 <= m, n <= 10
+       * - grid[i][j] is 0, 1, or 2
+       * 
+       * Intuition:
+       * - Use multi-source BFS starting from all rotten oranges
+       * - Track time taken for each fresh orange to become rotten
+       * - Count fresh oranges to ensure all can be rotten
+       * 
+       * Approach:
+       * 1. Find all rotten oranges and count fresh ones
+       * 2. Add all rotten oranges to queue as starting points
+       * 3. Process level by level (each level = 1 minute):
+       *    - For each rotten orange, check 4 adjacent cells
+       *    - If adjacent orange is fresh, make it rotten
+       *    - Track remaining fresh oranges
+       * 4. Return minutes taken or -1 if impossible
+       * 
+       * Time Complexity: O(m * n), where m and n are grid dimensions
+       * Space Complexity: O(m * n) for the queue
+       */
       public static int orangesRotting(int[][] grid) {
           if (grid == null || grid.length == 0) return 0;
         

@@ -22,10 +22,51 @@ public class CloneGraph {
         }
     }
     
-    // Problem: Clone a graph
-    // Explanation: This problem involves cloning an undirected graph using BFS traversal. By visiting each node and its neighbors, we can create a deep copy of the graph efficiently.
-    // Time Complexity: O(V + E), where V is the number of vertices and E is the number of edges.
-    // Space Complexity: O(V), due to the space required for the queue and visited map.
+    /*
+     * Problem Statement:
+     * Given a reference of a node in a connected undirected graph, return a deep copy (clone) of the graph.
+     * Each node in the graph contains a value (int) and a list (List[Node]) of its neighbors.
+     * 
+     * Example 1:
+     * Input: adjList = [[2,4],[1,3],[2,4],[1,3]]
+     * Output: [[2,4],[1,3],[2,4],[1,3]]
+     * Explanation: The graph has 4 nodes:
+     * 1. Node 1's value is 1, and it has two neighbors: Node 2 and 4
+     * 2. Node 2's value is 2, and it has two neighbors: Node 1 and 3
+     * 3. Node 3's value is 3, and it has two neighbors: Node 2 and 4
+     * 4. Node 4's value is 4, and it has two neighbors: Node 1 and 3
+     * 
+     * Example 2:
+     * Input: adjList = [[]]
+     * Output: [[]]
+     * Explanation: Note that the input contains one empty list [[]]. The graph consists of only one node with val = 1 and no neighbors.
+     * 
+     * Constraints:
+     * - The number of nodes in the graph is in the range [0, 100]
+     * - 1 <= Node.val <= 100
+     * - Node.val is unique for each node
+     * - There are no repeated edges and no self-loops in the graph
+     * - The Graph is connected and all nodes can be visited starting from the given node
+     * 
+     * Intuition:
+     * - Use BFS to traverse the original graph level by level
+     * - Maintain a visited map to track cloned nodes and avoid cycles
+     * - For each node, create a clone if not already created
+     * - For each neighbor, create its clone and establish connections
+     * 
+     * Approach:
+     * 1. Initialize a HashMap to store mapping between original and cloned nodes
+     * 2. Use BFS with a queue to traverse the graph:
+     *    - For each node, create its clone if not exists
+     *    - For each neighbor:
+     *      a. Create neighbor's clone if not exists
+     *      b. Add to queue for processing
+     *      c. Connect current clone with neighbor's clone
+     * 3. Return the clone of the starting node
+     * 
+     * Time Complexity: O(V + E), where V is the number of vertices and E is the number of edges
+     * Space Complexity: O(V), for the queue and visited map
+     */
     public static Node cloneGraph(Node node) {
         if (node == null) return null;
         

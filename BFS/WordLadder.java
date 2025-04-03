@@ -2,10 +2,51 @@ import java.util.*;
 
 public class WordLadder {
     
-    // Problem: Find shortest transformation sequence
-    // Explanation: This problem involves finding the shortest transformation sequence from a start word to an end word, using a dictionary of valid words. BFS is used to explore all possible transformations level by level, ensuring the shortest path is found.
-    // Time Complexity: O(n * m^2), where n is the number of words in the dictionary and m is the length of each word.
-    // Space Complexity: O(n * m), due to the space required for the queue and visited set.
+    /*
+     * Problem Statement:
+     * Given two words, beginWord and endWord, and a dictionary wordList, return the length of the shortest
+     * transformation sequence from beginWord to endWord such that:
+     * - Only one letter can be changed at a time
+     * - Each transformed word must exist in the word list
+     * Return 0 if there is no such transformation sequence.
+     * 
+     * Example 1:
+     * Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log","cog"]
+     * Output: 5
+     * Explanation: One shortest transformation sequence is "hit" -> "hot" -> "dot" -> "dog" -> "cog",
+     * return its length 5.
+     * 
+     * Example 2:
+     * Input: beginWord = "hit", endWord = "cog", wordList = ["hot","dot","dog","lot","log"]
+     * Output: 0
+     * Explanation: The endWord "cog" is not in wordList, therefore there is no valid transformation sequence.
+     * 
+     * Constraints:
+     * - 1 <= beginWord.length <= 10
+     * - endWord.length == beginWord.length
+     * - 1 <= wordList.length <= 5000
+     * - wordList[i].length == beginWord.length
+     * - beginWord, endWord, and wordList[i] consist of lowercase English letters
+     * - beginWord != endWord
+     * - All the words in wordList are unique
+     * 
+     * Intuition:
+     * - Use BFS to find shortest transformation sequence
+     * - Each word represents a node in the graph
+     * - Two words are connected if they differ by one letter
+     * - BFS ensures we find the shortest path first
+     * 
+     * Approach:
+     * 1. Convert wordList to HashSet for O(1) lookups
+     * 2. Use BFS starting from beginWord:
+     *    - For each word, try changing each character
+     *    - Add valid transformations to queue
+     *    - Track visited words to avoid cycles
+     * 3. Return level + 1 when endWord is found
+     * 
+     * Time Complexity: O(N * 26 * L^2), where N is dictionary size, L is word length
+     * Space Complexity: O(N), for the queue and visited set
+     */
     public static int ladderLength(String beginWord, String endWord, List<String> wordList) {
         // Convert wordList to a HashSet for O(1) lookups
         Set<String> wordSet = new HashSet<>(wordList);

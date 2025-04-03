@@ -12,10 +12,41 @@ public class AverageLevels {
         }
     }
     
-    // Problem: Find average of all values at each tree level
-    // Explanation: This problem extends the basic BFS traversal by calculating the average value of nodes at each level. By maintaining a running sum and count of nodes at each level, we can compute the average efficiently.
-    // Time Complexity: O(n), where n is the number of nodes in the tree.
-    // Space Complexity: O(n), due to the space required for the queue.
+    /*
+     * Problem Statement:
+     * Given the root of a binary tree, return the average value of the nodes on each level
+     * in the form of an array. Answers within 10^-5 of the actual answer will be accepted.
+     * 
+     * Example 1:
+     * Input: root = [3,9,20,15,7]
+     * Output: [3.00000,14.50000,11.00000]
+     * Explanation: The average value of nodes on level 0 is 3, on level 1 is 14.5, and on level 2 is 11.
+     * 
+     * Example 2:
+     * Input: root = [1]
+     * Output: [1.00000]
+     * 
+     * Constraints:
+     * - The number of nodes in the tree is in the range [1, 10^4]
+     * - -2^31 <= Node.val <= 2^31 - 1
+     * 
+     * Intuition:
+     * - Use BFS to traverse the tree level by level
+     * - For each level, calculate sum of node values and count of nodes
+     * - Average = sum / count for each level
+     * 
+     * Approach:
+     * 1. Initialize queue with root node and result list
+     * 2. For each level:
+     *    - Track level size and calculate sum of node values
+     *    - Process all nodes at current level
+     *    - Add their children to queue for next level
+     *    - Calculate average = sum / size and add to result
+     * 3. Return list of averages
+     * 
+     * Time Complexity: O(n), where n is the number of nodes in the tree
+     * Space Complexity: O(w), where w is the maximum width of the tree
+     */
     public static List<Double> averageOfLevels(TreeNode root) {
         List<Double> result = new ArrayList<>();
         if (root == null) return result;
